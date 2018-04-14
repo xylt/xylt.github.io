@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>numpy 研究总结 - 致知阁</title>
+	<meta name="description" content="NumPy系统是Python的一种开源的数值计算扩展。这种工具可用来存储和处理大型矩阵，比Python自身的嵌套列表（nested list structure)结构要高效的多（该结构也可以用来表示矩阵（matrix））。">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta property="og:image" content="">
+	<link rel="shortcut icon" href="/assets/img/favicon/favicon.ico" type="image/x-icon">
+	<link rel="apple-touch-icon" href="/assets/img/favicon/apple-touch-icon.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="/assets/img/favicon/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="/assets/img/favicon/apple-touch-icon-114x114.png">
+	<!-- Chrome, Firefox OS and Opera -->
+	<meta name="theme-color" content="#2d2a2a">
+	<!-- Windows Phone -->
+	<meta name="msapplication-navbutton-color" content="#2d2a2a">
+	<!-- iOS Safari -->
+	<meta name="apple-mobile-web-app-status-bar-style" content="#2d2a2a">
+
+	<link href="https://fonts.googleapis.com/css?family=Finger+Paint|PT+Sans:400,700" rel="stylesheet">
+	<link rel="stylesheet" href="/assets/fonts/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="/assets/css/main.css">
+</head>
+
+<body>
+
+  <aside class="sidebar">
+
+  <div class="sidebar-container">
+    <div class="sidebar-logo">
+      <a href="/" class="logo">Stone05</a>
+    </div>
+
+    <menu class="sidebar-menu">
+      <li class="menu-items"><a class="menu-links" href="/">主页</a></li>
+      <li class="menu-items"><a class="menu-links" href="/about/">关于</a></li>
+      <li class="menu-items"><a class="menu-links" href="/contact/">联系我</a></li>
+      <li class="menu-items"><a class="menu-links" href="https://github.com/xylt">My Github</a></li>
+    </menu>
+
+    <div class="sidebar-social">
+      <li class="social-items"><a href="https://github.com/xylt" class="social-links"><i class="social-icons fa fa-github" aria-hidden="true"></i></a></li>
+    </div>
+
+  </div>
+</aside>
+
+
+  <main role="main">
+    <div class="content">
+      <article class="page-article">
+  <div class="wrap-content">
+    <header class="page-header">
+      <h1 class="page-title">numpy 研究总结</h1>
+      <div class="page-date"><span>2018, Feb 23&nbsp;&nbsp;&nbsp;&nbsp;</span></div>
+    </header>
+    <div class="page-content">
+      
+      <img class="page-img" src=/assets/img/china_tiger_leaping_gorge.jpg alt="numpy 研究总结">
+      
+      <div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">np</span><span class="o">.</span><span class="n">__version__</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>'1.14.0'
+</code></pre>
+</div>
+
+<h1 id="创建">创建</h1>
+
+<h2 id="numpyarray">numpy.array</h2>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">nparr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)])</span>
+<span class="n">nparr</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">nparr</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>5
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">nparr</span><span class="o">.</span><span class="n">dtype</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>dtype('int32')
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">nparr2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">])</span>
+<span class="n">nparr2</span><span class="o">.</span><span class="n">dtype</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>dtype('float64')
+</code></pre>
+</div>
+
+<h4 id="numpyarray其他创建方式">numpy.array其他创建方式</h4>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">dtype</span> <span class="o">=</span> <span class="nb">int</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>array([0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span> <span class="n">dtype</span> <span class="o">=</span> <span class="nb">int</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>array([[0, 0, 0, 0, 0],
+       [0, 0, 0, 0, 0],
+       [0, 0, 0, 0, 0]])
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">dtype</span> <span class="o">=</span> <span class="nb">int</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>array([1, 1, 1, 1, 1, 1, 1, 1, 1, 1])
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span> <span class="n">dtype</span> <span class="o">=</span> <span class="nb">int</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>array([[1, 1, 1, 1, 1],
+       [1, 1, 1, 1, 1],
+       [1, 1, 1, 1, 1]])
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span> <span class="n">fill_value</span> <span class="o">=</span> <span class="mi">666</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>array([[666, 666, 666, 666, 666],
+       [666, 666, 666, 666, 666],
+       [666, 666, 666, 666, 666]])
+</code></pre>
+</div>
+
+<h2 id="numpyarange">numpy.arange</h2>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="c"># 用法同range()</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>array([ 0,  2,  4,  6,  8, 10, 12, 14, 16, 18])
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span> <span class="c"># 可以设置步长为浮点数</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>array([1. , 1.5, 2. , 2.5, 3. , 3.5, 4. , 4.5])
+</code></pre>
+</div>
+
+<h2 id="numpylinspace">numpy.linspace</h2>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">11</span><span class="p">)</span> <span class="c"># 0 到 20 等长的截取出 11个点</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>array([ 0.,  2.,  4.,  6.,  8., 10., 12., 14., 16., 18., 20.])
+</code></pre>
+</div>
+
+<h2 id="numpyrandom">numpy.random</h2>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="c"># 0 到 10 随机数</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>3
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span> <span class="c"># 0 到 10 5个随机数</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>array([1, 7, 9, 4, 9])
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span> <span class="c"># 0 到 10 5个随机数</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>array([[5, 6, 5, 5, 5],
+       [0, 0, 8, 0, 6],
+       [8, 7, 0, 3, 9]])
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">123</span><span class="p">)</span> <span class="c"># 设置随机种子</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span> <span class="c"># 0 到 10 5个随机数</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>array([[2, 2, 6, 1, 3],
+       [9, 6, 1, 0, 1],
+       [9, 0, 0, 9, 3]])
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="c"># 0 到 1 随机数</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>0.24475927695391986
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="c"># 0 到 1 10个随机数</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>array([0.69475518, 0.5939024 , 0.63179202, 0.44025718, 0.08372648,
+       0.71233018, 0.42786349, 0.2977805 , 0.49208478, 0.74029639])
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span> <span class="c"># 0 到 1 矩阵随机数</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>array([[0.35772892, 0.41720995, 0.65472131, 0.37380143, 0.23451288],
+       [0.98799529, 0.76599595, 0.77700444, 0.02798196, 0.17390652],
+       [0.15408224, 0.07708648, 0.8898657 , 0.7503787 , 0.69340324]])
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">()</span> <span class="c"># 均值为0，方差为1 的正态分布的随机数</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>-3.055577417640911
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span> <span class="c"># 均值为10，方差为100 的正态分布的随机数</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>-166.50564344909273
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span> <span class="c"># 均值为0，方差为1 的正态分布的随机数矩阵</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>array([[ 0.73860005, -0.50777635,  0.22799089, -1.74042135, -0.5345051 ],
+       [-0.93774867, -1.48630088, -0.02936315, -1.23714237,  0.07598604],
+       [-1.94519772, -0.23484041, -1.81456729,  0.05963647, -0.39763149]])
+</code></pre>
+</div>
+
+<h1 id="操作">操作</h1>
+
+<h2 id="numpyarray-1">numpy.array</h2>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">X</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>array([[ 0,  1,  2,  3,  4],
+       [ 5,  6,  7,  8,  9],
+       [10, 11, 12, 13, 14]])
+</code></pre>
+</div>
+
+<h4 id="基本属性">基本属性</h4>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">X</span><span class="o">.</span><span class="n">ndim</span> <span class="c"># 维数</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>2
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">X</span><span class="o">.</span><span class="n">shape</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>(3, 5)
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">X</span><span class="o">.</span><span class="n">size</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>15
+</code></pre>
+</div>
+
+<h4 id="数据访问">数据访问</h4>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">X</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>array([0, 1, 2, 3, 4])
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">X</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="c"># 对于切片操作有问题</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>1
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">X</span><span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>1
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">X</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="c"># 建议</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>14
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">X</span><span class="p">[:</span><span class="mi">2</span><span class="p">,</span> <span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="c"># 前2行3列</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>array([[0, 1, 2],
+       [5, 6, 7]])
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">X</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="c"># 反转矩阵</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>array([[14, 13, 12, 11, 10],
+       [ 9,  8,  7,  6,  5],
+       [ 4,  3,  2,  1,  0]])
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">X</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="c"># 取一列</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>array([ 0,  5, 10])
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">subX</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:</span><span class="mi">2</span><span class="p">,</span> <span class="p">:</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span> <span class="c"># 深拷贝</span>
+<span class="n">subX</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>array([[0, 1, 2],
+       [5, 6, 7]])
+</code></pre>
+</div>
+
+<h2 id="reshape">reshape</h2>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">X</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="c"># 重置维度</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>array([[ 0,  1,  2],
+       [ 3,  4,  5],
+       [ 6,  7,  8],
+       [ 9, 10, 11],
+       [12, 13, 14]])
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">X</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="c"># 重置维度 不考虑为 -1</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>array([[ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14]])
+</code></pre>
+</div>
+
+<h4 id="合并操作">合并操作</h4>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>
+<span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">])</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>array([1, 2, 3, 4, 5, 6])
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">X</span><span class="p">,</span> <span class="n">X</span><span class="p">])</span> <span class="c"># 只能拼接相同维数的矩阵</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>array([[ 0,  1,  2,  3,  4],
+       [ 5,  6,  7,  8,  9],
+       [10, 11, 12, 13, 14],
+       [ 0,  1,  2,  3,  4],
+       [ 5,  6,  7,  8,  9],
+       [10, 11, 12, 13, 14]])
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">X</span><span class="p">,</span> <span class="n">X</span><span class="p">],</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="c"># axis 为拼接方向 默认为0 </span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>array([[ 0,  1,  2,  3,  4,  0,  1,  2,  3,  4],
+       [ 5,  6,  7,  8,  9,  5,  6,  7,  8,  9],
+       [10, 11, 12, 13, 14, 10, 11, 12, 13, 14]])
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">])</span> <span class="c"># 参数为列表 垂直拼接</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>array([[1, 2, 3],
+       [4, 5, 6]])
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">])</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>array([1, 2, 3, 4, 5, 6])
+</code></pre>
+</div>
+
+<h4 id="分割操作">分割操作</h4>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">])</span> <span class="c"># 第二个参数为分割点</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>[array([0, 1, 2]), array([3, 4, 5, 6]), array([7, 8, 9])]
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">np</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="c"># 水平分割矩阵</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>[array([[ 0],
+        [ 5],
+        [10]]), array([[ 1,  2,  3,  4],
+        [ 6,  7,  8,  9],
+        [11, 12, 13, 14]])]
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">np</span><span class="o">.</span><span class="n">vsplit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="c"># 垂直分割矩阵</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>[array([[0, 1, 2, 3, 4],
+        [5, 6, 7, 8, 9]]), array([[10, 11, 12, 13, 14]])]
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">np</span><span class="o">.</span><span class="n">hsplit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="c"># 水平分割矩阵</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>[array([[ 0,  1],
+        [ 5,  6],
+        [10, 11]]), array([[ 2,  3,  4],
+        [ 7,  8,  9],
+        [12, 13, 14]])]
+</code></pre>
+</div>
+
+<h4 id="运算">运算</h4>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">a</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">x</span>
+<span class="n">a</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>array([2, 4, 6])
+</code></pre>
+</div>
+
+<h4 id="universal-functions">Universal Functions</h4>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">a</span> <span class="o">+</span> <span class="mi">1</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>array([3, 5, 7])
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">a</span> <span class="o">-</span> <span class="mi">2</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>array([0, 2, 4])
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">a</span> <span class="o">//</span> <span class="mi">2</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>array([1, 2, 3], dtype=int32)
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">a</span> <span class="o">**</span> <span class="mi">2</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>array([ 4, 16, 36], dtype=int32)
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">np</span><span class="o">.</span><span class="nb">abs</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>array([2, 4, 6])
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>array([ 0.90929743, -0.7568025 , -0.2794155 ])
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">a</span> <span class="o">*</span> <span class="n">x</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>array([ 2,  8, 18])
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">b</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">b</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span> <span class="c"># 点乘</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>array([[ 4,  5,  6],
+       [ 8, 10, 12],
+       [12, 15, 18]])
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">X</span><span class="o">.</span><span class="n">T</span> <span class="c"># 转置矩阵</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>array([[ 0,  5, 10],
+       [ 1,  6, 11],
+       [ 2,  7, 12],
+       [ 3,  8, 13],
+       [ 4,  9, 14]])
+</code></pre>
+</div>
+
+<h4 id="向量和矩阵运算">向量和矩阵运算</h4>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span> <span class="c"># 维数 自动匹配</span>
+<span class="n">b</span> <span class="o">+</span> <span class="n">v</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>array([[2, 3],
+       [3, 4],
+       [4, 5]])
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span> <span class="c"># 堆叠</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>array([[1, 2, 1, 2, 1, 2],
+       [1, 2, 1, 2, 1, 2]])
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">A</span><span class="p">)</span> <span class="c"># 逆矩阵</span>
+<span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">pinv</span><span class="p">(</span><span class="n">A</span><span class="p">)</span> <span class="c"># 伪逆矩阵</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>array([[2, 3],
+       [2, 3]])
+</code></pre>
+</div>
+
+<h4 id="聚合操作">聚合操作</h4>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">np</span><span class="o">.</span><span class="nb">sum</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="c"># 矩阵求和</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>12
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">np</span><span class="o">.</span><span class="nb">min</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>2
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">np</span><span class="o">.</span><span class="nb">max</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>6
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">np</span><span class="o">.</span><span class="nb">sum</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="c"># 矩阵每列求和</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>array([15, 18, 21, 24, 27])
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">np</span><span class="o">.</span><span class="nb">sum</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="c"># 矩阵每行求和</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>array([10, 35, 60])
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="c"># 矩阵求积</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>48
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="c"># 平均值</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>4.0
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="c"># 中位数</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>4.0
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">q</span> <span class="o">=</span> <span class="mi">50</span><span class="p">)</span> <span class="c"># 百分位</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>4.0
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="c"># 方差</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>2.6666666666666665
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="c"># 标准差</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>1.632993161855452
+</code></pre>
+</div>
+
+<h2 id="索引">索引</h2>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="c"># 最小值的索引</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>0
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="c"># 最大值的索引</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>2
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="c"># 排序</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>array([0, 1, 2], dtype=int64)
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">np</span><span class="o">.</span><span class="n">partition</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="c"># 分区 </span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>array([2, 4, 6])
+</code></pre>
+</div>
+
+<h4 id="fancy-indexing">Fancy Indexing</h4>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">l</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">ind</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="n">l</span><span class="p">[</span><span class="n">ind</span><span class="p">]</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>array([2, 3, 5])
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">row</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="n">col</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="n">X</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">]</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>array([ 1,  7, 13])
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">col</span> <span class="o">=</span> <span class="p">[</span><span class="bp">True</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="bp">True</span><span class="p">,</span> <span class="bp">True</span><span class="p">,</span> <span class="bp">True</span><span class="p">]</span>
+<span class="n">X</span><span class="p">[:</span><span class="mi">2</span><span class="p">,</span> <span class="n">col</span><span class="p">]</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>array([[0, 2, 3, 4],
+       [5, 7, 8, 9]])
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">X</span> <span class="o">&lt;</span> <span class="mi">5</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>array([[ True,  True,  True,  True,  True],
+       [False, False, False, False, False],
+       [False, False, False, False, False]])
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">np</span><span class="o">.</span><span class="nb">sum</span><span class="p">(</span><span class="n">X</span><span class="o">&lt;</span><span class="mi">5</span><span class="p">)</span> <span class="c"># 小于5的数之和</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>5
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">np</span><span class="o">.</span><span class="nb">any</span><span class="p">(</span><span class="n">X</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="c"># 是否含有0</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>True
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">np</span><span class="o">.</span><span class="nb">all</span><span class="p">(</span><span class="n">X</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="c"># 是否都是0</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>False
+</code></pre>
+</div>
+
+
+    </div>
+    
+
+  </div>
+</article>
+
+    </div>
+  </main>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', '', 'auto');
+  ga('send', 'pageview');
+</script>
+
+</body>
+</html>

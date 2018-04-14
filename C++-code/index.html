@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>C++代码审查规范 - 致知阁</title>
+	<meta name="description" content="对于不同的编程语言来说，具体的编码规范可以有很大的不同，但是其宗旨都是一致的，就是保证代码在高质量完成需求的同时具备良好的可读性、可维护性。">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta property="og:image" content="">
+	<link rel="shortcut icon" href="/assets/img/favicon/favicon.ico" type="image/x-icon">
+	<link rel="apple-touch-icon" href="/assets/img/favicon/apple-touch-icon.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="/assets/img/favicon/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="/assets/img/favicon/apple-touch-icon-114x114.png">
+	<!-- Chrome, Firefox OS and Opera -->
+	<meta name="theme-color" content="#2d2a2a">
+	<!-- Windows Phone -->
+	<meta name="msapplication-navbutton-color" content="#2d2a2a">
+	<!-- iOS Safari -->
+	<meta name="apple-mobile-web-app-status-bar-style" content="#2d2a2a">
+
+	<link href="https://fonts.googleapis.com/css?family=Finger+Paint|PT+Sans:400,700" rel="stylesheet">
+	<link rel="stylesheet" href="/assets/fonts/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="/assets/css/main.css">
+</head>
+
+<body>
+
+  <aside class="sidebar">
+
+  <div class="sidebar-container">
+    <div class="sidebar-logo">
+      <a href="/" class="logo">Stone05</a>
+    </div>
+
+    <menu class="sidebar-menu">
+      <li class="menu-items"><a class="menu-links" href="/">主页</a></li>
+      <li class="menu-items"><a class="menu-links" href="/about/">关于</a></li>
+      <li class="menu-items"><a class="menu-links" href="/contact/">联系我</a></li>
+      <li class="menu-items"><a class="menu-links" href="https://github.com/xylt">My Github</a></li>
+    </menu>
+
+    <div class="sidebar-social">
+      <li class="social-items"><a href="https://github.com/xylt" class="social-links"><i class="social-icons fa fa-github" aria-hidden="true"></i></a></li>
+    </div>
+
+  </div>
+</aside>
+
+
+  <main role="main">
+    <div class="content">
+      <article class="page-article">
+  <div class="wrap-content">
+    <header class="page-header">
+      <h1 class="page-title">C++代码审查规范</h1>
+      <div class="page-date"><span>2018, Feb 10&nbsp;&nbsp;&nbsp;&nbsp;</span></div>
+    </header>
+    <div class="page-content">
+      
+      <img class="page-img" src=/assets/img/zagreb_city.jpg alt="C++代码审查规范">
+      
+      <p>对于不同的编程语言来说，具体的编码规范可以有很大的不同，但是其宗旨都是一致的，就是保证代码在高质量完成需求的同时具备良好的可读性、可维护性。</p>
+<h3 id="文件结构">文件结构：</h3>
+<ul>
+  <li>头文件和定义文件的名称是否合理？</li>
+  <li>头文件和定义文件的目录结构是否合理？</li>
+  <li>版权和版本声明是否完整？</li>
+  <li>*头文件是否使用了 ifndef/define/endif 预处理块?</li>
+  <li>头文件中是否只存放“声明”而不存放“定义”</li>
+</ul>
+
+<h3 id="程序的版式">程序的版式：</h3>
+<ul>
+  <li>空行是否得体？</li>
+  <li>代码行内的空格是否得体？</li>
+  <li>长行拆分是否得体？</li>
+  <li>*一行代码是否只做一件事？如只定义一个变量，只写一条语句。</li>
+  <li>*If、for、while、do等语句自占一行，不论执行语句多少都要加“{}”。</li>
+  <li>*在定义变量（或参数）时，是否将修饰符 * 和 ＆ 紧靠变量名？</li>
+  <li>*注释是否有错误或者可能导致误解？</li>
+  <li>*类结构的public, protected, private顺序是否在所有的程序中保持一致？</li>
+</ul>
+
+<h3 id="命名规则">命名规则：</h3>
+<ul>
+  <li>标识符的长度应当符合“min-length &amp;&amp; max-information”原则？</li>
+  <li>*程序中是否出现相同的局部变量和全部变量？</li>
+  <li>类名、函数名、变量和参数、常量的书写格式是否遵循一定的规则？</li>
+  <li>静态变量、全局变量、类的成员变量是否加前缀？</li>
+</ul>
+
+<h3 id="表达式与基本语句">表达式与基本语句：</h3>
+<ul>
+  <li>*如果代码行中的运算符比较多，是否已经用括号清楚地确定表达式的操作顺序？</li>
+  <li>*是否将复合表达式与“真正的数学表达式”混淆？</li>
+  <li>*是否用隐含错误的方式写if语句?</li>
+  <li>如果循环体内存在逻辑判断，并且循环次数很大，是否已经将逻辑判断移到循环体的外面？</li>
+  <li>*Case语句的结尾是否忘了加break？</li>
+  <li>*是否忘记写switch的default分支？</li>
+</ul>
+
+<h3 id="常量">常量：</h3>
+<ul>
+  <li>是否使用含义直观的常量来表示那些将在程序中多次出现的数字或字符串？</li>
+  <li>在C++ 程序中，是否用const常量取代宏常量？</li>
+  <li>*如果某一常量与其它常量密切相关，是否在定义中包含了这种关系？</li>
+</ul>
+
+<h3 id="函数设计">函数设计：</h3>
+<ul>
+  <li>参数的书写是否完整？</li>
+  <li>参数命名、顺序是否合理？</li>
+  <li>参数的个数是否太多？</li>
+  <li>函数名字与返回值类型在语义上是否冲突？</li>
+  <li>*是否将正常值和错误标志混在一起返回？正常值应当用输出参数获得，而错误标志用return语句返回。</li>
+  <li>*在函数体的“入口处”，是否用assert对参数的有效性进行检查？</li>
+  <li>*return语句是否返回指向“栈内存”的“指针”或者“引用”？</li>
+  <li>*是否使用const提高函数的健壮性？</li>
+</ul>
+
+<h3 id="内存管理">*内存管理：</h3>
+<ul>
+  <li>用malloc或new申请内存之后，是否立即检查指针值是否为NULL？（防止使用指针值为NULL的内存）</li>
+  <li>是否忘记为数组和动态内存赋初值？（防止将未被初始化的内存作为右值使用）</li>
+  <li>数组或指针的下标是否越界？</li>
+  <li>动态内存的申请与释放是否配对？（防止内存泄漏）</li>
+  <li>是否有效地处理了“内存耗尽”问题？</li>
+  <li>是否修改“指向常量的指针”的内容？</li>
+  <li>是否出现野指针？例如
+ 	（1）指针变量没有被初始化。
+ 	（2）用free或delete释放了内存之后，忘记将指针设置为NULL。</li>
+  <li>是否将malloc/free 和 new/delete 混淆使用？</li>
+  <li>malloc语句是否正确无误？例如字节数是否正确？类型转换是否正确？</li>
+  <li>在创建与释放动态对象数组时，new/delete的语句是否正确无误？</li>
+</ul>
+
+<h3 id="c函数的高级特性">C++函数的高级特性：</h3>
+<ul>
+  <li>重载函数是否有二义性？</li>
+  <li>*是否混淆了成员函数的重载、覆盖与隐藏？</li>
+  <li>是否滥用内联函数？例如函数体内的代码比较长，函数体内出现循环</li>
+  <li>是否用内联函数取代了宏代码？</li>
+</ul>
+
+<h3 id="类的构造函数析构函数和赋值函数">*类的构造函数、析构函数和赋值函数：</h3>
+<ul>
+  <li>是否违背编程规范而让C++ 编译器自动为类产生四个缺省的函数：
+  （1）缺省的无参数构造函数；
+  （2）缺省的拷贝构造函数；
+  （3）缺省的析构函数；
+  （4）缺省的赋值函数。</li>
+  <li>构造函数中是否遗漏了某些初始化工作？</li>
+  <li>是否正确地使用构造函数的初始化表？</li>
+  <li>析构函数中是否遗漏了某些清除工作？</li>
+  <li>是否错写、错用了拷贝构造函数和赋值函数？</li>
+  <li>赋值函数一般分四个步骤：
+  （1）检查自赋值；
+  （2）释放原有内存资源；
+  （3）分配新的内存资源，并复制内容；
+  （4）返回 *this。是否遗漏了重要步骤？</li>
+  <li>是否正确地编写了派生类的构造函数、析构函数、赋值函数？注意事项：
+  （1）派生类不可能继承基类的构造函数、析构函数、赋值函数。
+  （2）派生类的构造函数应在其初始化表里调用基类的构造函数。
+  （3）基类与派生类的析构函数应该为虚（即加virtual关键字）。
+  （4）在编写派生类的赋值函数时，注意不要忘记对基类的数据成员重新赋值。</li>
+</ul>
+
+<h3 id="类的高级特性">*类的高级特性：</h3>
+<ul>
+  <li>是否违背了继承和组合的规则？
+  （1）若在逻辑上B是A的“一种”，并且A的所有功能和属性对B而言都有意义，则允许B继承A的功能和属性。
+  （2）若在逻辑上A是B的“一部分”（a part of），则不允许B从A派生，而是要用A和其它东西组合出B。</li>
+</ul>
+
+<h3 id="其它常见问题">*其它常见问题：</h3>
+<ul>
+  <li>数据类型问题：
+  （１）变量的数据类型有错误吗？
+  （２）存在不同数据类型的赋值吗？
+  （３）存在不同数据类型的比较吗？</li>
+  <li>变量值问题：
+  （１）变量的初始化或缺省值有错误吗？
+  （２）变量发生上溢或下溢吗？
+  （３）变量的精度够吗？</li>
+  <li>逻辑判断问题：
+  （１）由于精度原因导致比较无效吗？
+  （２）表达式中的优先级有误吗？
+  （３）逻辑判断结果颠倒吗？</li>
+  <li>循环问题：
+  （１）循环终止条件不正确吗？
+  （２）无法正常终止（死循环）吗？
+  （３）错误地修改循环变量吗？
+  （４）存在误差累积吗？</li>
+  <li>错误处理问题：
+  （１）忘记进行错误处理吗？
+  （２）错误处理程序块一直没有机会被运行？
+  （３）错误处理程序块本身就有毛病吗？如报告的错误与实际错误不一致，处理方式不正确等等。
+  （４）错误处理程序块是“马后炮”吗？如在被它被调用之前软件已经出错。</li>
+  <li>文件I/O问题：
+  （１）对不存在的或者错误的文件进行操作吗？
+  （２）文件以不正确的方式打开吗？
+  （３）文件结束判断不正确吗？
+  （４）没有正确地关闭文件吗？</li>
+</ul>
+
+
+    </div>
+    
+
+  </div>
+</article>
+
+    </div>
+  </main>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', '', 'auto');
+  ga('send', 'pageview');
+</script>
+
+</body>
+</html>
