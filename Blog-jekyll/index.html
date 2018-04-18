@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>如何搭建自己的个人网站？ - 致知阁</title>
+	<meta name="description" content="无论是曾经，还是现在，甚至是将来，时时刻刻都有新站长的涌现。拥有一个可以记录和分享的网站，有益于个人的成长。那么怎么搭建一个个人的网站呢？我们从零开始搭建一个个人网站。">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta property="og:image" content="">
+	<link rel="shortcut icon" href="/assets/img/favicon/favicon.ico" type="image/x-icon">
+	<link rel="apple-touch-icon" href="/assets/img/favicon/apple-touch-icon.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="/assets/img/favicon/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="/assets/img/favicon/apple-touch-icon-114x114.png">
+	<!-- Chrome, Firefox OS and Opera -->
+	<meta name="theme-color" content="#2d2a2a">
+	<!-- Windows Phone -->
+	<meta name="msapplication-navbutton-color" content="#2d2a2a">
+	<!-- iOS Safari -->
+	<meta name="apple-mobile-web-app-status-bar-style" content="#2d2a2a">
+
+	<link href="https://fonts.googleapis.com/css?family=Finger+Paint|PT+Sans:400,700" rel="stylesheet">
+	<link rel="stylesheet" href="/assets/fonts/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="/assets/css/main.css">
+</head>
+
+<body>
+
+  <aside class="sidebar">
+
+  <div class="sidebar-container">
+    <div class="sidebar-logo">
+      <a href="/" class="logo">Stone05</a>
+    </div>
+
+    <menu class="sidebar-menu">
+      <li class="menu-items"><a class="menu-links" href="/">主页</a></li>
+      <li class="menu-items"><a class="menu-links" href="/about/">关于</a></li>
+      <li class="menu-items"><a class="menu-links" href="/contact/">联系我</a></li>
+      <li class="menu-items"><a class="menu-links" href="https://github.com/xylt">My Github</a></li>
+    </menu>
+
+    <div class="sidebar-social">
+      <li class="social-items"><a href="https://github.com/xylt" class="social-links"><i class="social-icons fa fa-github" aria-hidden="true"></i></a></li>
+    </div>
+
+  </div>
+</aside>
+
+
+  <main role="main">
+    <div class="content">
+      <article class="page-article">
+  <div class="wrap-content">
+    <header class="page-header">
+      <h1 class="page-title">如何搭建自己的个人网站？</h1>
+      <div class="page-date"><span>2018, Apr 18&nbsp;&nbsp;&nbsp;&nbsp;</span></div>
+    </header>
+    <div class="page-content">
+      
+      <img class="page-img" src=/assets/img/learn.jpg alt="如何搭建自己的个人网站？">
+      
+      <p>无论是曾经，还是现在，甚至是将来，时时刻刻都有新站长的涌现。拥有一个可以记录和分享的网站，有益于个人的成长。
+那么怎么搭建一个个人的网站呢？我们从零开始搭建一个个人网站。</p>
+
+<h2 id="第一步-git">第一步 Git</h2>
+
+<hr />
+
+<h3 id="1安装git">1.安装Git</h3>
+<ul>
+  <li>
+    <p>安装Git
+<a href="https://github-production-release-asset-2e65be.s3.amazonaws.com/23216272/caadf4ec-1641-11e8-8f85-577fa933ab56?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAIWNJYAX4CSVEH53A/20180418/us-east-1/s3/aws4_request&amp;X-Amz-Date=20180418T134949Z&amp;X-Amz-Expires=300&amp;X-Amz-Signature=3cfedfbc3573e1468e91213faaaf2ae65cd0abd8ef78d124da2f61c406998269&amp;X-Amz-SignedHeaders=host&amp;actor_id=7935013&amp;response-content-disposition=attachment;%20filename=Git-2.16.2-64-bit.exe&amp;response-content-type=application/octet-stream">64-bit Git for Windows Setup.</a></p>
+  </li>
+  <li>
+    <p>安装Git图形化工具
+<a href="https://tortoisegit.org/download/">Tortoisegit</a></p>
+  </li>
+</ul>
+
+<h3 id="2在-github-创建名为-xxxgithubio-的库">2.在 Github 创建名为 xxx.github.io 的库</h3>
+<p>按照 Github Pages 上的说明，首先要创建一个新的库，把它命名为 xxx.github.io。.io 是英属印度洋领地的顶级域名，博客搭建成功后，这就是该博客的访问网址。库名的第一部分需要与用户名一致才能生效。所以如果你的用户名是 xxx，库的名字就要 xxx.github.io。另外，不需要勾选「Initialize this repository with a README」。</p>
+<ul>
+  <li>在本地连接github的远端库
+    <div class="highlighter-rouge"><pre class="highlight"><code>  git init
+  git add README.md
+  git commit -m "first commit"
+  git remote add origin https://github.com/xxx/xxx.github.io.git
+  git push -u origin master
+</code></pre>
+    </div>
+    <p>或者使用图形化工具Tortoisegit连接GitHub</p>
+  </li>
+</ul>
+
+<h2 id="第二步-jekyll">第二步 Jekyll</h2>
+
+<hr />
+
+<p>Jekyll 是一个简单的博客形态的静态站点生产机器。它有一个模版目录，其中包含原始文本格式的文档，通过 Markdown （或者 Textile） 以及 Liquid 转化成一个完整的可发布的静态网站，你可以发布在任何你喜爱的服务器上。Jekyll 也可以运行在 GitHub Page 上，也就是说，你可以使用 GitHub 的服务来搭建你的项目页面、博客或者网站，而且是完全免费的。</p>
+
+<blockquote>
+  <p>安装Jekyll有三步：</p>
+  <ul>
+    <li>安装 Ruby</li>
+    <li>安装 DevKit</li>
+    <li>安装 Jekyll</li>
+  </ul>
+</blockquote>
+
+<h3 id="1安装ruby">1.安装Ruby</h3>
+<p><a href="https://pan.baidu.com/s/1FXVVM01520KUXj9aqc3crg">Ruby 2.3.0-x64</a></p>
+<ul>
+  <li>安装注意
+勾选 add PATH 自动帮你配置环境变量，要安装在根目录 
+<img src="http://stone05-image.oss-cn-beijing.aliyuncs.com/18-4-18/94703197.jpg" alt="enter image description here" /></li>
+</ul>
+
+<h3 id="2安装devkit">2.安装DevKit</h3>
+<p><a href="https://pan.baidu.com/s/1OfaS819fcLlEcRTQ1-BFRA">DevKit 4.7.2</a></p>
+<ol>
+  <li>运行安装包并解压缩至某文件夹，如 D:\DevKit</li>
+  <li>通过初始化来创建 config.yml 文件。在命令行窗口内，输入下列命令：
+    <div class="highlighter-rouge"><pre class="highlight"><code> cd “D:\DevKit”
+ ruby dk.rb init
+ notepad config.yml
+</code></pre>
+    </div>
+  </li>
+  <li>在打开的记事本窗口中，于末尾添加新的一行- C:\Ruby230-x64( 这段代表加上自己的ruby路径， 实际中可以将C:\Ruby200-x64改为自己的实际ruby目录)，保存文件并退出。</li>
+  <li>回到命令行窗口内
+    <div class="highlighter-rouge"><pre class="highlight"><code> ruby dk.rb install
+</code></pre>
+    </div>
+    <ul>
+      <li><strong>更改默认的source源</strong>
+鉴于官方源可能无法访问，所以我们得更换为可以使用的源，这里推荐使用[ruby china][]源，大致步骤如下：</li>
+    </ul>
+  </li>
+  <li>先键入命令gem sources -l 查看当前已经添加的源</li>
+  <li>然后通过 gem sources -r https://rubygems.org/ 移除官方源</li>
+  <li>通过 gem sources -a http://gems.ruby-china.org 添加了[ruby china][]的可用源</li>
+  <li>修改来源后可以通过gem sources -l 查看是否正确修改
+    <h3 id="3安装jekyll">3.安装Jekyll</h3>
+    <div class="highlighter-rouge"><pre class="highlight"><code> gem install jekyll --version "=3.1.3"
+ jekyll -v
+</code></pre>
+    </div>
+    <p>测试是否安装完毕： 
+ <img src="http://stone05-image.oss-cn-beijing.aliyuncs.com/18-4-19/71004414.jpg" alt="enter image description here" /></p>
+    <h3 id="4新建博客">4.新建博客</h3>
+    <div class="highlighter-rouge"><pre class="highlight"><code> jekyll new myblog
+ cd myblog
+</code></pre>
+    </div>
+    <p>成功运行！
+<img src="http://stone05-image.oss-cn-beijing.aliyuncs.com/18-4-19/11627855.jpg" alt="enter image description here" />
+<img src="http://stone05-image.oss-cn-beijing.aliyuncs.com/18-4-19/99383726.jpg" alt="enter image description here" /></p>
+  </li>
+</ol>
+
+<h2 id="第三步-博客部署到远端">第三步 博客部署到远端</h2>
+
+<hr />
+
+<h3 id="文章">文章</h3>
+<p>所有的文章都是 _posts 目录下面，文章格式为 mardown 格式，文章文件名可以是 .mardown 或者 .md。</p>
+
+<p>编写一篇新文章很简单，你可以直接从 _posts/ 目录下复制一份出来 2018-01-11-welcome-to-jekyll副本.markdown ，修改名字为 2018-01-11-article1.markdown ，注意：文章名的格式前面必须为 2018-01-11- ，日期可以修改，但必须为 年-月-日- 格式，后面的 article1 是整个文章的连接 URL，如果文章名为中文，那么文章的连接URL就会变成这样的：http://baixin.io/2018/01/%E6%90%AD%E5/ ， 所以建议文章名最好是英文的或者阿拉伯数字。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>---
+layout: post
+title:  "Welcome to Jekyll!"
+date:   2018-01-11
+tag: jekyll update
+--- 注意：文章头部格式必须为上面的样板。
+</code></pre>
+</div>
+
+<h3 id="模板">模板</h3>
+<p>Jekyll 有很多好看的模板 <a href="http://jekyllthemes.org/">jekyllthemes</a>
+下载喜欢的模板，修改配置_config.yml 文件。具体参考：<a href="https://www.jekyll.com.cn/">Jekyll中文文档</a></p>
+
+<p><strong>一个基本的 Jekyll 网站的目录结构一般是像这样的：</strong></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>.
+├── _config.yml
+├── _includes
+|   ├── footer.html
+|   └── header.html
+├── _layouts
+|   ├── default.html
+|   ├── post.html
+|   └── page.html
+├── _posts
+|   └── 2018-01-11-welcome-to-jekyll.md
+├── _sass
+|   ├── _base.scss
+|   ├── _layout.scss
+|   └── _syntax-highlighting.scss
+├── about.md
+├── css
+|   └── main.scss
+├── feed.xml
+└── index.html
+</code></pre>
+</div>
+
+<p>部署_site文件夹到Github的远端仓库。使用xxx.github.io就可以查看部署好的网站。</p>
+
+<h3 id="域名">域名</h3>
+<p>如果需要绑定自己特有的域名，参考：<a href="https://www.jianshu.com/p/58236ae6fc00">Github个人博客绑定独立域名</a></p>
+
+    </div>
+    
+
+  </div>
+</article>
+
+    </div>
+  </main>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', '', 'auto');
+  ga('send', 'pageview');
+</script>
+
+</body>
+</html>
