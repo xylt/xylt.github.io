@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Python3 实现命令行动态进度条 - 致知阁</title>
+	<meta name="description" content="在动画里连续的画面是由一帧帧单独的图片构成的。动态进度条即是如此，在同一行内连续播放不同的图案。">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta property="og:image" content="">
+	<link rel="shortcut icon" href="/assets/img/favicon/favicon.ico" type="image/x-icon">
+	<link rel="apple-touch-icon" href="/assets/img/favicon/apple-touch-icon.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="/assets/img/favicon/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="/assets/img/favicon/apple-touch-icon-114x114.png">
+	<!-- Chrome, Firefox OS and Opera -->
+	<meta name="theme-color" content="#2d2a2a">
+	<!-- Windows Phone -->
+	<meta name="msapplication-navbutton-color" content="#2d2a2a">
+	<!-- iOS Safari -->
+	<meta name="apple-mobile-web-app-status-bar-style" content="#2d2a2a">
+
+	<link href="https://fonts.googleapis.com/css?family=Finger+Paint|PT+Sans:400,700" rel="stylesheet">
+	<link rel="stylesheet" href="/assets/fonts/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="/assets/css/main.css">
+</head>
+
+<body>
+
+  <aside class="sidebar">
+
+  <div class="sidebar-container">
+    <div class="sidebar-logo">
+      <a href="/" class="logo">Stone05</a>
+    </div>
+
+    <menu class="sidebar-menu">
+      <li class="menu-items"><a class="menu-links" href="/">主页</a></li>
+      <li class="menu-items"><a class="menu-links" href="/about/">关于</a></li>
+      <li class="menu-items"><a class="menu-links" href="/contact/">联系我</a></li>
+      <li class="menu-items"><a class="menu-links" href="https://github.com/xylt">My Github</a></li>
+    </menu>
+
+    <div class="sidebar-social">
+      <li class="social-items"><a href="https://github.com/xylt" class="social-links"><i class="social-icons fa fa-github" aria-hidden="true"></i></a></li>
+    </div>
+
+  </div>
+</aside>
+
+
+  <main role="main">
+    <div class="content">
+      <article class="page-article">
+  <div class="wrap-content">
+    <header class="page-header">
+      <h1 class="page-title">Python3 实现命令行动态进度条</h1>
+      <div class="page-date"><span>2018, Apr 19&nbsp;&nbsp;&nbsp;&nbsp;</span></div>
+    </header>
+    <div class="page-content">
+      
+      <img class="page-img" src=/assets/img/wooden_house.jpg alt="Python3 实现命令行动态进度条">
+      
+      <h2 id="1-原理">1. 原理</h2>
+<p>在动画里连续的画面是由一帧帧单独的图片构成的。动态进度条即是如此，在同一行内连续播放不同的图案。
+<strong>我们首先来使用 print() 函数来制作一个简易的进度条：</strong></p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.3</span><span class="p">)</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">'</span><span class="se">\r</span><span class="s">'</span><span class="p">)</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">'</span><span class="se">\n</span><span class="s">'</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<ul>
+  <li>因为 python 中的标准输入输出默认是使用行缓冲的。而对于行缓冲来说，缓冲区读取到换行符 \n 或回车符 \r 时刷新缓冲区。所以我们需要使用 sys.stdout.flush() 函数在每次迭代时手动刷新缓冲区。</li>
+  <li>需要使用一个字符：回车符 \r。回车符的作用是回到行首，这时我们再输出字符将会覆盖同一行内已存在的字符。</li>
+</ul>
+
+<p><img src="https://stone05-image.oss-cn-beijing.aliyuncs.com/18-4-19/probar.gif" alt="" /></p>
+
+<h2 id="2-项目结构">2. 项目结构</h2>
+<p><img src="http://stone05-image.oss-cn-beijing.aliyuncs.com/18-4-19/28566787.jpg" alt="" /></p>
+<ul>
+  <li><strong>prog_class.py</strong> 文件定义了类 <strong>Prog</strong></li>
+  <li><strong>progbar.py</strong> 定义了类 <strong>ProgBar</strong></li>
+  <li><strong>progpercent.py</strong> 定义了类 <strong>ProgPercent</strong></li>
+  <li>
+    <p><strong>generator_factory.py</strong> 定义了函数 <strong>prog_percent()</strong> 及 <strong>prog_bar()</strong>。</p>
+  </li>
+  <li>类 <strong>ProgBar</strong> 和 <strong>prog_bar()</strong> 是用来提供进度条的</li>
+  <li>类 <strong>ProgPercent</strong> 和 <strong>prog_percent()</strong> 则提供进度百分比指示器。</li>
+</ul>
+
+<h2 id="3-实现源码">3. 实现源码</h2>
+
+<ul>
+  <li><a href="https://github.com/xylt/prog_bar">进度条源码</a></li>
+</ul>
+
+<h2 id="4-效果展示">4. 效果展示</h2>
+<p><img src="https://stone05-image.oss-cn-beijing.aliyuncs.com/18-4-19/probar1.gif" alt="" />
+<img src="https://stone05-image.oss-cn-beijing.aliyuncs.com/18-4-19/probar2.gif" alt="" /></p>
+
+    </div>
+    
+
+  </div>
+</article>
+
+    </div>
+  </main>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', '', 'auto');
+  ga('send', 'pageview');
+</script>
+
+</body>
+</html>
